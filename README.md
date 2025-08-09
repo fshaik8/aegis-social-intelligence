@@ -62,3 +62,36 @@ The project follows a classic and powerful real-time pipeline architecture:
     *   Navigate to your `aegis-social-processor` Lambda function in the AWS Console.
     *   Go to the **Monitor** tab and click on **View CloudWatch logs**.
     *   Open the latest log stream to see the real-time, AI-enriched JSON output for each post processed.
+    *   
+
+
+## Example Output
+
+When the pipeline runs, the `aegis-social-processor` AWS Lambda function outputs a structured, AI-enriched JSON object for each social media post to Amazon CloudWatch. This object contains the original post data along with the analysis performed by Amazon Comprehend.
+
+Here is a complete, real example from the project's logs for a post that was correctly identified as a high-priority, negative event requiring immediate attention:
+
+```json
+{
+  "post_id": "4a6ed877-4a9a-47df-a7c0-c01dc3bc99bd",
+  "platform": "Reddit",
+  "content": "URGENT: @AegisSocial has a massive security flaw! My personal data was exposed! #DataBreach #PrivacyFail",
+  "author_id": "user_4031",
+  "timestamp_utc": "2025-08-08T07:51:53.593078+00:00",
+  "analysis_results": {
+    "sentiment": "NEGATIVE",
+    "sentiment_score": {
+      "Positive": 0.0019970962312072515,
+      "Negative": 0.9072232246398926,
+      "Neutral": 0.08599211275577545,
+      "Mixed": 0.004787519108504057
+    },
+    "key_phrases": [
+      "URGENT",
+      "@AegisSocial",
+      "a massive security flaw",
+      "My personal data"
+    ]
+  }
+}
+```
